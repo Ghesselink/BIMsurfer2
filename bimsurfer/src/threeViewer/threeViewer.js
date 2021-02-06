@@ -411,6 +411,9 @@ define(["../EventHandler", "../Utils"], function(EventHandler, Utils) {
             if (params.clear) {
                 self.selected.clear();
             }
+            if (!params.selected){
+                self.selected.delete(self.nameToId.get(params.ids[0]))
+            }
             params.ids.forEach((id) => {
                 var id2 = self.nameToId.get(id);
                 var node = scene.getObjectById(id2);
@@ -419,6 +422,7 @@ define(["../EventHandler", "../Utils"], function(EventHandler, Utils) {
                         // Handle objects with multiple materials which become groups
                         for (var c of scene.getObjectById(id2).children) {
                             self.selected.add(c.id);
+                            console.log(c)
                         }
                     } else {
                         self.selected.add(id2);
